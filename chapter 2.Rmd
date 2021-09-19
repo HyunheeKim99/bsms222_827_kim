@@ -5,9 +5,7 @@ output:
     df_print: paged
 ---
 
-# Chapter 2
-
-## R basics 
+# Chapter 2 R basics 
 
 In this book, we will be using the R software environment for all our analysis. You will learn R and data analysis techniques simultaneously. To follow along you will therefore need access to R. We also recommend the use of an integrated development environment (IDE), such as RStudio, to save your work. Note that it is common for a course or workshop to offer access to an R environment and an IDE through your web browser, as done by RStudio cloud12. If you have access to such a resource, you don’t need to install R and RStudio. However, if you intend on becoming an advanced data analyst, we highly recommend installing these tools on your computer13. Both R and RStudio are free and available online.
 
@@ -16,21 +14,22 @@ In this book, we will be using the R software environment for all our analysis. 
 
 Imagine you live in Europe and are offered a job in a US company with many locations across all states. It is a great job, but news with headlines such as US Gun Homicide Rate Higher Than Other Developed Countries14 have you worried. Charts like this may concern you even more:
 
-![print][image]
 
-[image]:https://rafalab.github.io/dsbook/book_files/figure-html/murder-rate-example-1-1.png
+![ ][cat]
+
+[cat]:https://rafalab.github.io/dsbook/book_files/figure-html/murder-rate-example-1-1.png
 
 
 
 
 Or even worse, this version from everytown.org:
-![orange cat][orange]
+![ ][orange]
 
 [orange]:https://rafalab.github.io/dsbook/book_files/figure-html/murder-rate-example-2-1.png
 
 But then you remember that the US is a large and diverse country with 50 very different states as well as the District of Columbia (DC).
 
-![print][cyan]
+![ ][cyan]
 
 
 [cyan]:https://rafalab.github.io/dsbook/book_files/figure-html/us-murders-by-state-map-1.png
@@ -95,9 +94,9 @@ ls()
 ```
 In RStudio, the Environment tab shows the values:
 
-![image][image]
+![ ]][so]
 
-[image]:https://rafalab.github.io/dsbook/R/img/rstudio-environment.png
+[so]:https://rafalab.github.io/dsbook/R/img/rstudio-environment.png
 
 We should see a, b, and c. If you try to recover the value of a variable that is not in your workspace, you receive an error. For example, if you type x you will receive the following message: Error: object 'x' not found.
 
@@ -657,7 +656,8 @@ But be careful not to confuse the single quote ’ with the back quote `.
 
 By now you should know that if you type:
 ```{r}
-country <- c(italy, canada, egypt)
+country <- c('italy', 'canada', 'egypt')
+
 ```
 you receive an error because the variables italy, canada, and egypt are not defined. If we do not use the quotes, R looks for variables with those names and returns an error.
 
@@ -1187,30 +1187,33 @@ data(murders)
 In Chapter 7 we describe an add-on package that provides a powerful approach to producing plots in R. We then have an entire part on Data Visualization in which we provide many examples. Here we briefly describe some of the functions that are available in a basic R installation.
 
 ### 2.15.1 plot
+
 The plot function can be used to make scatterplots. Here is a plot of total murders versus population.
+  
 ```{r}
 x <- murders$population / 10^6
 y <- murders$total
 plot(x, y)
 ```
-![image][image]
+![  ][image]
 
 [image]:https://rafalab.github.io/dsbook/book_files/figure-html/first-plot-1.png 
 
 For a quick plot that avoids accessing variables twice, we can use the with function:
+
 ```{r}
 with(murders, plot(population, total))
 ```
+
 ### 2.15.2 hist
+
 We will describe histograms as they relate to distributions in the Data Visualization part of the book. Here we will simply note that histograms are a powerful graphical summary of a list of numbers that gives you a general overview of the types of values you have. We can make a histogram of our murder rates by simply typing:
 ```{r}
 x <- with(murders, total / population * 100000)
 hist(x)
 ```
 
-![image][images]
 
-[images]:https://rafalab.github.io/dsbook/book_files/figure-html/r-base-hist-1.png
 
 We can see that there is a wide range of values with most of them between 2 and 3 and one very extreme case with a murder rate of more than 15:
 
@@ -1218,16 +1221,16 @@ We can see that there is a wide range of values with most of them between 2 and 
 murders$state[which.max(x)]
 #> [1] "District of Columbia"
 ```
+
 ### 2.15.3 boxplot
+
 Boxplots will also be described in the Data Visualization part of the book. They provide a more terse summary than histograms, but they are easier to stack with other boxplots. For example, here we can use them to compare the different regions:
 ```{r}
 murders$rate <- with(murders, total / population * 100000)
 boxplot(rate~region, data = murders)
 ```
 
-![image][imagery]
 
-[imagery]: https://rafalab.github.io/dsbook/book_files/figure-html/r-base-boxplot-1.png
 
 We can see that the South has higher murder rates than the other three regions.
 
@@ -1237,11 +1240,12 @@ The image function displays the values in a matrix using color. Here is a quick 
 x <- matrix(1:120, 12, 10)
 image(x)
 ```
-![image][imageries]
-[imageries]:https://rafalab.github.io/dsbook/book_files/figure-html/image-first-example-1.png
+
+
 
 ## 2.16 Exercises
 1. We made a plot of total murders versus population and noted a strong relationship. Not surprisingly, states with larger populations had more murders.
+
 ```{r}
 library(dslabs)
 data(murders)
